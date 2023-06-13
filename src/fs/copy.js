@@ -1,11 +1,15 @@
 import fs from "fs"
 import path from "path"
+import { fileURLToPath } from "url"
 
 const copy = async () => {
-  const sourceDir = "src/fs/files"
-  const targetDir = "src/fs/files_copy"
+  const currentPath = path.dirname(fileURLToPath(import.meta.url))
+  const sourceDirName = "files"
+  const targetDirName = "files_copy"
   const errorContent = "FS operation failed"
   const notfoundCode = "ENOENT"
+  const sourceDir = path.join(currentPath, sourceDirName)
+  const targetDir = path.join(currentPath, targetDirName)
 
   try {
     const sourceDirStats = await fs.promises.stat(sourceDir)
